@@ -18,7 +18,7 @@ void ofApp::setup(){
 }
 
 void ofApp::update(){
-    videos[currentVideo].update();c
+    videos[currentVideo].update();
 }
 
 void ofApp::draw(){
