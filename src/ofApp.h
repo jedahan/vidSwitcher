@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxOMXPlayer.h"
 
 class ofApp : public ofBaseApp{
 
@@ -12,7 +13,7 @@ class ofApp : public ofBaseApp{
 		void keyPressed(int key);
 
         ofDirectory dir;
-        vector<ofVideoPlayer> videos;
+        vector<ofxOMXPlayer> omxPlayers;
     
-        int currentVideo;
+        int currentPlayer;
 };

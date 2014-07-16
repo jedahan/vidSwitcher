@@ -6,37 +6,38 @@ void ofApp::setup(){
 	dir.sort();
 
 	if( dir.size() ){
-		videos.assign(dir.size(), ofVideoPlayer());
+		omxPlayers.assign(dir.size(), ofxOmxPlayer());
 	}
     
 	for(int i = 0; i < (int)dir.size(); i++){
-		videos[i].loadMovie(dir.getPath(i));
+		omxPlayers[i].loadMovie(dir.getPath(i));
 	}
-	currentVideo = 0;
+	currentPlayer = 0;
 
 	ofBackground(ofColor::white);
 }
 
 void ofApp::update(){
-    videos[currentVideo].update();
 }
 
 void ofApp::draw(){
-    videos[currentVideo].draw(0, 0);
+    omxPlayers[currentPlayer].draw(0, 0, ofGetWidth(), ofGetHeight());
+    
+    ofDrawBitmapStringHighlight(omxPlayers[currentPlayer].getInfo(), 60, 60, ofColor(ofColor::black, 90), ofColor::yellow);
 }
 
 void ofApp::keyPressed(int key){
-    videos[currentVideo].stop();
+    omxPlayers[currentPlayer].stop();
     switch(key){
         case OF_KEY_LEFT:
-            currentVideo--;
-            if(currentVideo < 0) { currentVideo = videos.size()-1; }
+            currentPlayer--;
+            if(currentPlayer < 0) { currentPlayer = omxPlayers.size()-1; }
             break;
         default:
-            currentVideo++;
-            currentVideo %= videos.size();
+            currentPlayer++;
+            currentPlayer %= omxPlayers.size();
             break;
     }
-    videos[currentVideo].play();
+    omxPlayers[currentPlayer].play();
     ofSetFullscreen(true);
 }
